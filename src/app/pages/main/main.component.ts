@@ -47,4 +47,8 @@ export class MainComponent implements OnInit, OnDestroy {
     this.router.navigate(['/'], params);
   }
 
+  onSelectTeam(teamId: number): void {
+    console.log(teamId);
+  }
+
 }

@@ -1,1 +1,28 @@
-<p>standing works!</p>
+<table class="table table-light table-striped table-hover table-responsive" *ngIf="league">
+  <thead class="thead-light">
+    <tr>
+      <th class="text-center">#</th>
+      <th class="min-width"></th>
+      <th>Name</th>
+      <th class="text-center">Games</th>
+      <th class="text-center">W</th>
+      <th class="text-center">L</th>
+      <th class="text-center">D</th>
+      <th class="text-center">GD</th>
+      <th class="text-center">Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pos of league.standings[0]">
+      <td class="text-center"> {{ pos.rank }} </td>
+      <td class="min-width"><img class="team-logo" [src]="pos.team.logo"></td>
+      <td> <a (click)="onSelectTeam(pos.team.id)"> {{ pos.team.name }} </a> </td>
+      <td class="text-center"> {{ pos.all.played }} </td>
+      <td class="text-center"> {{ pos.all.win }} </td>
+      <td class="text-center"> {{ pos.all.lose }} </td>
+      <td class="text-center"> {{ pos.all.draw }} </td>
+      <td class="text-center"> {{ pos.goalsDiff }} </td>
+      <td class="text-center"> {{ pos.points }} </td>
+    </tr>
+  </tbody>
+</table>
