@@ -1,1 +1,5 @@
-<p>main works!</p>
+<app-league-selector
+  [leagues]="leagues"
+  [selectedLeagueId]="selectedLeagueId"
+  (selectLeague)="onSelectLeague($event)"
+/>

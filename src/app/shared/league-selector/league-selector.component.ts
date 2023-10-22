@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { LeagueSelector } from './league-selector.model';
 
 @Component({
   selector: 'app-league-selector',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./league-selector.component.scss']
 })
 export class LeagueSelectorComponent {
+
+  @Input() leagues: LeagueSelector[] = [];
+  @Input() selectedLeagueId: number = 0;
+  @Output() selectLeague: EventEmitter<LeagueSelector> = new EventEmitter();
+
+  onSelectLeague(league: LeagueSelector): void {
+    this.selectLeague.emit(league);
+  }
 
 }

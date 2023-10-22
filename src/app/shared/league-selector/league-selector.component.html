@@ -1,1 +1,9 @@
-<p>league-selector works!</p>
+<div class="text-center">
+  <button *ngFor="let league of leagues" 
+    [attr.id]="league.countryName.toLowerCase()+'Select'" 
+    class="btn btn-link"
+    (click)="onSelectLeague(league)" 
+    [class.active]="league.id === selectedLeagueId"> 
+    {{ league.countryName }} 
+  </button>
+</div>

@@ -12,6 +12,10 @@ import { StandingComponent } from './standing/standing.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    LeagueSelectorComponent,
+    StandingComponent
   ]
 })
 export class SharedModule { }
