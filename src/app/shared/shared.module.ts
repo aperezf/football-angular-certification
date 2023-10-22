@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LeagueSelectorComponent } from './league-selector/league-selector.component';
-import { StandingComponent } from './standing/standing.component';
+import { LeagueSelectorComponent } from './components/league-selector/league-selector.component';
+import { StandingComponent } from './components/standing/standing.component';
 
 
 

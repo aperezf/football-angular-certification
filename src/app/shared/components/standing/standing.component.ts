@@ -22,6 +22,7 @@ export class StandingComponent {
   footballApiService = inject(FootballApiService);
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.leagueId == 0) return;
     this.footballApiService.getStandingByLeagueId(this.leagueId).pipe(
       takeUntil(this.notifier$)
     ).subscribe({

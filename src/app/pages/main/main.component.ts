@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Params, Router } from '@angular/router';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { LeagueSelectorService } from 'src/app/services/league-selector/league-selector.service';
-import { LeagueSelector } from 'src/app/shared/league-selector/league-selector.model';
+import { LeagueSelector } from 'src/app/shared/components/league-selector/league-selector.model';
 
 @Component({
   selector: 'app-main',
@@ -42,13 +42,16 @@ export class MainComponent implements OnInit, OnDestroy {
   onSelectLeague(leagueSelected: LeagueSelector): void {
     this.selectedLeagueId = leagueSelected.id;
     const params: NavigationExtras = {
-      queryParams: { 'league': leagueSelected.id }
+      queryParams: { 'league': leagueSelected.id}
     } 
     this.router.navigate(['/'], params);
   }
 
   onSelectTeam(teamId: number): void {
-    console.log(teamId);
+    const params: NavigationExtras = {
+      queryParams: { 'b': this.selectedLeagueId }
+    }
+    this.router.navigate(['/teams', teamId], params);
   }
 
 }

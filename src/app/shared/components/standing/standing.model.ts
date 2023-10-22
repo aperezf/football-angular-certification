@@ -1,26 +1,3 @@
-export interface FootballApiResponse {
-  get: string
-  parameters: Parameters
-  errors: any[]
-  results: number
-  paging: Paging
-  response: Response[]
-}
-
-export interface Parameters {
-  season: string
-  league: string
-}
-
-export interface Paging {
-  current: number
-  total: number
-}
-
-export interface Response {
-  league: League
-}
-
 export interface League {
   id: number
   name: string

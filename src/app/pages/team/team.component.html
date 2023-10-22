@@ -1,1 +1,30 @@
-<p>team works!</p>
+<ng-container *ngIf="fixtures.length > 0">
+  <div class="row" *ngFor="let fixture of fixtures">
+    <div class="col">
+      <img [src]="fixture.teams.home.logo" class="team-logo">
+    </div>
+    <div class="col">
+      {{ fixture.teams.home.name }}
+    </div>
+    <div class="col">
+      {{ fixture.goals.home }}
+    </div>
+    <div class="col">
+      -
+    </div>
+    <div class="col">
+      {{ fixture.goals.home }}
+    </div>
+    <div class="col">
+      {{ fixture.teams.home.name }}
+    </div>
+    <div class="col">
+      <img [src]="fixture.teams.home.logo" class="team-logo">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" type="button" (click)="onBack()">Back</button>
+    </div>
+  </div>
+</ng-container>
