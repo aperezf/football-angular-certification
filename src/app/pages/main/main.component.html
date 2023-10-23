@@ -1,9 +1,11 @@
-<app-league-selector
+<ng-container *ngIf="selectedLeague">
+  <app-league-selector
   [leagues]="leagues"
-  [selectedLeagueId]="selectedLeagueId"
+  [selectedLeagueId]="selectedLeague.id"
   (selectLeague)="onSelectLeague($event)"
 />
 <app-standing 
-  [leagueId]="selectedLeagueId"
+  [league]="selectedLeague"
   (selectTeam)="onSelectTeam($event)"
 />
+</ng-container>

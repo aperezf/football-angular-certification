@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Params, Router } from '@angular/router';
-import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, catchError, switchMap, takeUntil } from 'rxjs';
+import { FootballApiService } from 'src/app/services/football-api/football-api.service';
 import { LeagueSelectorService } from 'src/app/services/league-selector/league-selector.service';
 import { LeagueSelector } from 'src/app/shared/components/league-selector/league-selector.model';
+import { League } from 'src/app/shared/components/standing/standing.model';
 
 @Component({
   selector: 'app-main',
@@ -12,25 +14,29 @@ import { LeagueSelector } from 'src/app/shared/components/league-selector/league
 export class MainComponent implements OnInit, OnDestroy {
 
   leagues: LeagueSelector[] = [];
-  selectedLeagueId: number = 0;
+  selectedLeague: League | null = null;
   notifier$: Subject<void> = new Subject();
+  
 
   // Services
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private leagueSelectorService: LeagueSelectorService = inject(LeagueSelectorService);
+  private footballApiService: FootballApiService = inject(FootballApiService);
 
   ngOnInit(): void {
     this.leagueSelectorService.getAllLeagues().pipe(
       switchMap((leagues: LeagueSelector[]) => {
         this.leagues = leagues;
-        this.selectedLeagueId = leagues[0].id;
         return this.activatedRoute.queryParams.pipe(takeUntil(this.notifier$));
+      }),
+      switchMap((params: Params) => {
+        let league: number = parseInt(params['league']);
+        if (isNaN(league)) league = this.leagues[0].id;
+        return this.footballApiService.getStandingByLeagueId(league).pipe(takeUntil(this.notifier$));
       })
-    ).subscribe((params: Params) => {
-      const league: number = parseInt(params['league']);
-      if (isNaN(league)) return;
-      this.selectedLeagueId = league;
+    ).subscribe((l: League) => {
+      this.selectedLeague = l;
     });
   }
 
@@ -40,7 +46,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onSelectLeague(leagueSelected: LeagueSelector): void {
-    this.selectedLeagueId = leagueSelected.id;
     const params: NavigationExtras = {
       queryParams: { 'league': leagueSelected.id}
     } 
@@ -48,8 +53,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onSelectTeam(teamId: number): void {
+    const backLeagueId = this.selectedLeague !== null ? this.selectedLeague.id : this.leagues[0].id
     const params: NavigationExtras = {
-      queryParams: { 'b': this.selectedLeagueId }
+      queryParams: { 'b': backLeagueId }
     }
     this.router.navigate(['/teams', teamId], params);
   }
