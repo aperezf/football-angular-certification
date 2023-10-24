@@ -26,9 +26,9 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     HttpClientModule,
-    NgHttpCachingModule.forRoot(ngHttpCachingConfig)
+    NgHttpCachingModule.forRoot(ngHttpCachingConfig),
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: FootballApiKeyInterceptor, multi: true },
