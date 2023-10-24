@@ -1,8 +1,9 @@
 import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, delay, map } from 'rxjs';
-import { League } from 'src/app/shared/components/standing/standing.model';
-import { FixturesResponse, FootballApiResponse } from 'src/app/shared/models/football-api.model';
+import { Observable, map } from 'rxjs';
+import { League } from 'src/app/models/football-api/league.model';
+import { FootballApiResponse } from 'src/app/models/football-api/football-api-response.model';
+import { FixturesResponse } from 'src/app/models/football-api/fixtures-response.model';
 
 @Injectable({
   providedIn: 'root'

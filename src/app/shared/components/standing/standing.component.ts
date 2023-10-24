@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
-import { League } from './standing.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { League } from 'src/app/models/football-api/league.model';
 
 @Component({
   selector: 'app-standing',

@@ -12,7 +12,7 @@ import { MainComponent } from './pages/main/main.component';
 import { TeamComponent } from './pages/team/team.component';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
-  lifetime: 1000 * 60 * 60 * 24, // cache expire after 10 seconds
+  lifetime: 1000 * 60 * 60, // cache expire after 60 minutes
   allowedMethod: ['GET', 'HEAD'],
   cacheStrategy: NgHttpCachingStrategy.ALLOW_ALL,
 };

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LeagueSelector } from 'src/app/shared/components/league-selector/league-selector.model';
+import { LeagueSelector } from 'src/app/models/league-selector.model';
 
 @Injectable({
   providedIn: 'root'

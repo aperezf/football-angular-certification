@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FixturesResponse } from '../../models/football-api.model';
+import { FixturesResponse } from 'src/app/models/football-api/fixtures-response.model';
 
 @Component({
   selector: 'app-team-fixture',

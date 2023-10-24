@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Params, Router } from '@angular/router';
-import { Observable, Subject, catchError, switchMap, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { FootballApiService } from 'src/app/services/football-api/football-api.service';
 import { LeagueSelectorService } from 'src/app/services/league-selector/league-selector.service';
-import { LeagueSelector } from 'src/app/shared/components/league-selector/league-selector.model';
-import { League } from 'src/app/shared/components/standing/standing.model';
+import { LeagueSelector } from 'src/app/models/league-selector.model';
+import { League } from 'src/app/models/football-api/league.model';
 
 @Component({
   selector: 'app-main',
