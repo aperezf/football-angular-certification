@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { PagesModule } from './pages/pages.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgHttpCachingConfig, NgHttpCachingModule, NgHttpCachingStrategy } from 'ng-http-caching';
 import { environment } from 'src/environments/environment';
 import { FootballApiKeyInterceptor } from './services/football-api/football-api-key-interceptor.service';
+import { MainComponent } from './pages/main/main.component';
+import { TeamComponent } from './pages/team/team.component';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   lifetime: 1000 * 60 * 60 * 24, // cache expire after 10 seconds
@@ -18,7 +19,9 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,6 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     SharedModule,
     HttpClientModule,
     NgHttpCachingModule.forRoot(ngHttpCachingConfig)
-    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: FootballApiKeyInterceptor, multi: true },
