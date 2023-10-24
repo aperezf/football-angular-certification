@@ -1,4 +1,4 @@
-<table class="table table-light table-striped table-hover table-responsive" *ngIf="league">
+<table class="table table-light table-striped table-hover table-responsive my-5" *ngIf="league">
   <thead class="thead-light">
     <tr>
       <th class="text-center">#</th>
@@ -16,7 +16,7 @@
     <tr *ngFor="let pos of league.standings[0]">
       <td class="text-center"> {{ pos.rank }} </td>
       <td class="min-width"><img class="team-logo" [src]="pos.team.logo"></td>
-      <td> <a (click)="onSelectTeam(pos.team.id)"> {{ pos.team.name }} </a> </td>
+      <td> <a class="link-dark link-underline-opacity-100-hover link-underline-opacity-0" (click)="onSelectTeam(pos.team.id)" role="button"> {{ pos.team.name }} </a> </td>
       <td class="text-center"> {{ pos.all.played }} </td>
       <td class="text-center"> {{ pos.all.win }} </td>
       <td class="text-center"> {{ pos.all.lose }} </td>

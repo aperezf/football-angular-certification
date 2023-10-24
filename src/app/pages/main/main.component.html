@@ -1,11 +1,14 @@
-<ng-container *ngIf="selectedLeague">
-  <app-league-selector
+
+
+<app-league-selector
+  *ngIf="leagues && !isLoadingLeagues"
   [leagues]="leagues"
-  [selectedLeagueId]="selectedLeague.id"
-  (selectLeague)="onSelectLeague($event)"
-/>
+  [selectedLeagueId]="selectedLeagueId"
+  (selectLeague)="onSelectLeague($event)" />
+
 <app-standing 
+  *ngIf="selectedLeague && !isLoadingStanding"
   [league]="selectedLeague"
   (selectTeam)="onSelectTeam($event)"
 />
-</ng-container>
+<app-loading *ngIf="isLoadingLeagues || isLoadingStanding"/>

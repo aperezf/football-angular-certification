@@ -14,10 +14,12 @@ import { League } from 'src/app/shared/components/standing/standing.model';
 export class MainComponent implements OnInit, OnDestroy {
 
   leagues: LeagueSelector[] = [];
+  selectedLeagueId: number = 0;
   selectedLeague: League | null = null;
   notifier$: Subject<void> = new Subject();
+  isLoadingLeagues: boolean = true;
+  isLoadingStanding: boolean = true;
   
-
   // Services
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -28,15 +30,20 @@ export class MainComponent implements OnInit, OnDestroy {
     this.leagueSelectorService.getAllLeagues().pipe(
       switchMap((leagues: LeagueSelector[]) => {
         this.leagues = leagues;
+        this.selectedLeagueId = leagues[0].id;
+        this.isLoadingLeagues = false;
         return this.activatedRoute.queryParams.pipe(takeUntil(this.notifier$));
       }),
       switchMap((params: Params) => {
+        this.isLoadingStanding = true;
         let league: number = parseInt(params['league']);
         if (isNaN(league)) league = this.leagues[0].id;
+        this.selectedLeagueId = league
         return this.footballApiService.getStandingByLeagueId(league).pipe(takeUntil(this.notifier$));
       })
     ).subscribe((l: League) => {
       this.selectedLeague = l;
+      this.isLoadingStanding = false;
     });
   }
 
@@ -46,6 +53,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onSelectLeague(leagueSelected: LeagueSelector): void {
+    this.selectedLeagueId = leagueSelected.id;
     const params: NavigationExtras = {
       queryParams: { 'league': leagueSelected.id}
     } 

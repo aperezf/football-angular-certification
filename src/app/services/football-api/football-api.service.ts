@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
-import { League, Standing } from 'src/app/shared/components/standing/standing.model';
+import { Inject, Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, delay, map } from 'rxjs';
+import { League } from 'src/app/shared/components/standing/standing.model';
 import { FixturesResponse, FootballApiResponse } from 'src/app/shared/models/football-api.model';
 
 @Injectable({
@@ -9,22 +9,33 @@ import { FixturesResponse, FootballApiResponse } from 'src/app/shared/models/foo
 })
 export class FootballApiService {
 
+  currentSeason: number = new Date().getFullYear();
+
   http = inject(HttpClient);
 
-  constructor() { }
+  constructor(
+    @Inject('FOOTBALL_API_BASE_URL') private baseUrl: string
+  ) { }
 
   getStandingByLeagueId(leagueId: number): Observable<League> {
-    return this.http.get<FootballApiResponse>(`assets/${leagueId}.json`).pipe(
-      map((res: FootballApiResponse) => res.response[0]?.league),
-      map((l: League) => {
-        l.standings[0] = l.standings[0].sort((a: Standing, b: Standing) => a.rank - b.rank);
-        return l;
-      })
+    const params = new HttpParams()
+      .set('season', this.currentSeason)
+      .set('league', leagueId);
+    const url: string = `${this.baseUrl}/standings`;
+    // const url: string = `assets/${leagueId}.json`
+    return this.http.get<FootballApiResponse>(url, { params: params }).pipe(
+      map((res: FootballApiResponse) => res.response[0]?.league)
     );
   }
 
   getFixtureByTeamId(teamId: number): Observable<FixturesResponse[]> {
-    return this.http.get<FootballApiResponse>('assets/team.json').pipe(
+    const params = new HttpParams()
+      .set('season', this.currentSeason)
+      .set('team', teamId)
+      .set('last', 10);
+    const url: string = `${this.baseUrl}/fixtures`;
+    // const url: string = 'assets/team.json';
+    return this.http.get<FootballApiResponse>(url, { params: params }).pipe(
       map((res: FootballApiResponse) => res.response as FixturesResponse[])
     );
   }

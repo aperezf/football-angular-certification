@@ -1,0 +1,25 @@
+<ng-container *ngIf="fixtures.length > 0">
+  <div class="row border py-2 my-2" *ngFor="let fixture of fixtures">
+    <div class="col-1">
+      <img [src]="fixture.teams.home.logo" class="team-logo">
+    </div>
+    <div class="col-3 text-start" [class.fw-bolder]="fixture.teams.home.id === selectTeam">
+      {{ fixture.teams.home.name }}
+    </div>
+    <div class="col-1 text-center">
+      {{ fixture.goals.home }}
+    </div>
+    <div class="col-2 text-center">
+      -
+    </div>
+    <div class="col-1 text-center">
+      {{ fixture.goals.away }}
+    </div>
+    <div class="col-3 text-end" [class.fw-bolder]="fixture.teams.away.id === selectTeam">
+      {{ fixture.teams.away.name }}
+    </div>
+    <div class="col-1">
+      <img [src]="fixture.teams.away.logo" class="team-logo">
+    </div>
+  </div>
+</ng-container>
