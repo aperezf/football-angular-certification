@@ -8,7 +8,8 @@ import { LeagueSelector } from 'src/app/models/league-selector.model';
 })
 export class LeagueSelectorService {
 
-  private http = inject(HttpClient)
+  // Services
+  private http: HttpClient = inject(HttpClient)
 
   constructor() { }
 

@@ -11,7 +11,7 @@ export class StandingComponent {
   @Input() league: League | null = null;
   @Output() selectTeam: EventEmitter<number> = new EventEmitter();
 
-  onSelectTeam(teamId: number) {
+  onSelectTeam(teamId: number): void {
     this.selectTeam.emit(teamId);
   }
 

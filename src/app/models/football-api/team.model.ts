@@ -1,6 +1,6 @@
 export interface Team {
-  id: number
-  name: string
-  logo: string
+  id: number;
+  name: string;
+  logo: string;
   winner?: boolean | null;
 }

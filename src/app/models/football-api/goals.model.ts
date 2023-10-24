@@ -1,4 +1,4 @@
 export interface Goals {
-  for: number
-  against: number
+  for: number;
+  against: number;
 }

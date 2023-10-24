@@ -1,4 +1,4 @@
 export interface Paging {
-  current: number
-  total: number
+  current: number;
+  total: number;
 }

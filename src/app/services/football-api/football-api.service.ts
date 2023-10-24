@@ -12,7 +12,8 @@ export class FootballApiService {
 
   currentSeason: number = new Date().getFullYear();
 
-  http = inject(HttpClient);
+  // Services
+  private http: HttpClient = inject(HttpClient);
 
   constructor(
     @Inject('FOOTBALL_API_BASE_URL') private baseUrl: string
