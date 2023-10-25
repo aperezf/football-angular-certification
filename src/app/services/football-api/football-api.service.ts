@@ -23,8 +23,8 @@ export class FootballApiService {
     const params = new HttpParams()
       .set('season', this.currentSeason)
       .set('league', leagueId);
-    // const url: string = `${this.baseUrl}/standings`;
-    const url: string = `assets/${leagueId}.json`
+    const url: string = `${this.baseUrl}/standings`;
+    // const url: string = `assets/${leagueId}.json`
     return this.http.get<FootballApiResponse>(url, { params: params }).pipe(
       map((res: FootballApiResponse) => res.response[0]?.league)
     );
@@ -35,8 +35,8 @@ export class FootballApiService {
       .set('season', this.currentSeason)
       .set('team', teamId)
       .set('last', 10);
-    // const url: string = `${this.baseUrl}/fixtures`;
-    const url: string = 'assets/team.json';
+    const url: string = `${this.baseUrl}/fixtures`;
+    // const url: string = 'assets/team.json';
     return this.http.get<FootballApiResponse>(url, { params: params }).pipe(
       map((res: FootballApiResponse) => res.response as FixturesResponse[])
     );
